@@ -16,6 +16,5 @@ Steps to run cypress test
 
 
 NOTES:
-- This test involves client side form navigationin which the warning popup changes based on the navigation
+- This test involves client side form validation in which the warning popup message changes based on browser used
 - Test retries have been set to 2
-- 
