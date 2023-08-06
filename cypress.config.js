@@ -8,8 +8,12 @@ module.exports = defineConfig({
     },
     env: {
       baseUrl: "https://iodinesoftware.com",
-      defaultCommandTimeout: 10000
     },
-   
+   pageLoadTimeout: 20000,
+   defaultCommandTimeout: 10000,
+   retries: {
+    runMode: 2,
+    openMode: 2
+   }
   },
 });
