@@ -1,52 +1,36 @@
 class CareersPage {
-    //Get Iframe Document from recruiting by paycor
-    static getIframeDocument = () => {
-        return cy
-        .get('#gnewtonIframe', {timeout: 10000})
-        .its('0.contentDocument')
-      }
-      
-      //Get IframeBody
-      static getIframeBody = () => {
-        // get the document
-        return this.getIframeDocument()
-        // automatically retries until body is loaded
-        .its('body').should('not.be.undefined')
-        .then(cy.wrap)
-      }
-
-
       //PAGE SELECTORS
     static getPosition(position) {
-        return this.getIframeBody().contains(position);
+        return cy.getCareersIframe().contains(position);
     }
 
     static applyButton() {
-        return this.getIframeBody().find('[ns-qa="applyBtn"]')
+        return cy.getCareersIframe().find('[ns-qa="applyBtn"]')
+        
     }
 
     static continueButton() {
-        return this.getIframeBody().find('[ns-qa="continueBtn"]')
+        return cy.getCareersIframe().find('[ns-qa="continueBtn"]')
     }
 
     static getGender(gender) {
-        return this.getIframeBody().should('be.visible').find(`input#${gender}`)
+        return cy.getCareersIframe().should('be.visible').find(`input#${gender}`)
     }
 
     static getRace(race) {
-        return this.getIframeBody().should('be.visible').find(`input#race-${race}`)
+        return cy.getCareersIframe().should('be.visible').find(`input#race-${race}`)
     }
 
     static selectIfVeteran(option) {
-        return this.getIframeBody().find(`input#${option}`)
+        return cy.getCareersIframe().find(`input#${option}`)
     }
 
     static disabilityStatus(option) {
-        return this.getIframeBody().find(`input#${option}`)
+        return cy.getCareersIframe().find(`input#${option}`)
     }
 
     static enterYourName(name) {
-        return this.getIframeBody().find('[ns-qa="yourName"]').type(name)
+        return cy.getCareersIframe().find('[ns-qa="yourName"]').type(name)
     }
 
     static enterTodaysDate() {
@@ -62,27 +46,27 @@ class CareersPage {
 
         const year = today.getFullYear();
 
-        return this.getIframeBody().find('input[ns-qa="todayDate"]').type(`${year}-${month}-${day}`);
+        return cy.getCareersIframe().find('input[ns-qa="todayDate"]').type(`${year}-${month}-${day}`);
     }
    
     static enterFirstName(firstName) {
-        return this.getIframeBody().find('#firstName').type(firstName);
+        return cy.getCareersIframe().find('#firstName').type(firstName);
     }
     
     static enterLastName(lastName) {
-        return this.getIframeBody().find('#lastName').type(lastName);
+        return cy.getCareersIframe().find('#lastName').type(lastName);
     }
 
     static enterEmail(email) {
-        return this.getIframeBody().find('#email').type(email);
+        return cy.getCareersIframe().find('#email').type(email);
     }
 
     static submitButton() {
-        return this.getIframeBody().find('[ns-qa="submitBtn"]');
+        return cy.getCareersIframe().find('[ns-qa="submitBtn"]');
     }
 
     static validateEmailWarningPopup() {
-        this.getIframeBody().find('#email')
+        cy.getCareersIframe().find('#email')
         .invoke('prop', 'validationMessage')
         .should((text) => {
           expect(text).to.contain("Please include an '@' in the email address");
